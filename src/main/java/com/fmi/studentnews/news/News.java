@@ -1,19 +1,33 @@
 package com.fmi.studentnews.news;
 
+import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.Arrays;
+import java.util.Date;
 
 @Entity
 public class News {
-  @Id
-  @GeneratedValue Long id;
-  private String title;
-  private String author;
-  private String[] paragraphs;
+  @Id @GeneratedValue Long id;
+  @NonNull private String title;
+  @NonNull private String author;
+  @NonNull private String[] paragraphs;
+  @Nullable private String[] keywords;
+  @Nullable private Date creationDate = new Date();
 
   public News() {}
+
+  public News(News newNews) {
+    this.id = newNews.id;
+    this.title = newNews.title;
+    this.author = newNews.author;
+    this.paragraphs = Arrays.copyOf(newNews.paragraphs, newNews.paragraphs.length);
+    this.keywords = newNews.keywords != null ? Arrays.copyOf(newNews.keywords, newNews.keywords.length) : null;
+    this.creationDate = newNews.creationDate;
+  }
 
   public Long getId() {
     return id;
@@ -39,11 +53,27 @@ public class News {
     this.author = author;
   }
 
+  public Date getCreationDate() {
+    return creationDate;
+  }
+
+  public void setCreationDate(Date creationDate) {
+    this.creationDate = creationDate;
+  }
+
   public String[] getParagraphs() {
     return paragraphs;
   }
 
   public void setParagraphs(String[] paragraphs) {
     this.paragraphs = paragraphs;
+  }
+
+  public String[] getKeywords() {
+    return keywords;
+  }
+
+  public void setKeywords(String[] keywords) {
+    this.keywords = keywords;
   }
 }

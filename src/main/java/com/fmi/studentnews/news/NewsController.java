@@ -9,7 +9,12 @@ import java.util.List;
 @RestController
 public class NewsController {
 
-  private @Autowired NewsRepository newsRepository;
+  private final NewsRepository newsRepository;
+
+  @Autowired
+  public NewsController(NewsRepository newsRepository) {
+    this.newsRepository = newsRepository;
+  }
 
   @RequestMapping("/")
   public String index() {
@@ -29,5 +34,18 @@ public class NewsController {
   @PostMapping("/news")
   public News addNews(@RequestBody News newNews) {
     return newsRepository.save(newNews);
+  }
+
+  @DeleteMapping("/news/{id}")
+  public void deleteNews(@PathVariable Long id) {
+    this.newsRepository.deleteById(id);
+  }
+
+  @PutMapping("/news/{id}")
+  public News putNews(@PathVariable Long id, @RequestBody News newNews){
+    if (newNews.id == null){
+      newNews.setId(id);
+    }
+    return this.newsRepository.save(newNews);
   }
 }
