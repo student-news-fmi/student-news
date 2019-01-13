@@ -16,11 +16,6 @@ public class NewsController {
     this.newsRepository = newsRepository;
   }
 
-  @RequestMapping("/")
-  public String index() {
-    return "Welcome to Student News";
-  }
-
   @GetMapping("/news")
   public List<News> getAllNews() {
     return this.newsRepository.findAll();
