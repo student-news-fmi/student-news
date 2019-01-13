@@ -3,6 +3,7 @@ package com.fmi.studentnews.news;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,7 +15,11 @@ public class News {
   @Id @GeneratedValue Long id;
   @NonNull private String title;
   @NonNull private String author;
-  @NonNull private String[] paragraphs;
+
+  @Column(name = "paragraphs", length = 5000)
+  @NonNull
+  private String[] paragraphs;
+
   @Nullable private String[] keywords;
   @Nullable private Date creationDate = new Date();
 
@@ -25,7 +30,8 @@ public class News {
     this.title = newNews.title;
     this.author = newNews.author;
     this.paragraphs = Arrays.copyOf(newNews.paragraphs, newNews.paragraphs.length);
-    this.keywords = newNews.keywords != null ? Arrays.copyOf(newNews.keywords, newNews.keywords.length) : null;
+    this.keywords =
+        newNews.keywords != null ? Arrays.copyOf(newNews.keywords, newNews.keywords.length) : null;
     this.creationDate = newNews.creationDate;
   }
 

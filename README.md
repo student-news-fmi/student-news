@@ -24,7 +24,7 @@ You can start the application on different port than 8080, just add `-Dserver.po
 #### How to fill db
 you can execute `curl` queries to add new entities, for example:
 
-`curl -X POST "http://localhost:8080/news" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"author\": \"Denis\", \"id\": 0, \"paragraphs\": [ \"Hello from the first new done here\" ], \"title\": \"First news\"}"` 
+`curl -X POST "http://localhost:8081/news" -H "accept: */*" -H "Content-Type: application/json" -d "{ \"author\": \"test\", \"keywords\": [ \"asd\" ], \"paragraphs\": [ \"test\" ], \"title\": \"test\"}"` 
 
 #### Used technologies
 - Spring Boot 2.1.1.RELEASE
